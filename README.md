@@ -5,7 +5,9 @@ AntiDDOS feito totalmente em JAVA
 
 # Instalação - LINUX 
 
-``` sudo apt-get install openjdk-8-headless
-    javac Server.java
-    javac Client.java
+``` 
+sudo apt-get install openjdk-8-headless
+javac Server.java
+javac Client.java
+``` 
     
