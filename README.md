@@ -34,11 +34,13 @@ java Client
 
 ``` 
 javac Server.java
-javac Client.java```
+javac Client.java
+```
 
 - Inicie com
 
 
 ```
 java Server
-java Client ``
+java Client
+```
