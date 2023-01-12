@@ -1,3 +1,5 @@
+// **SCRIPT ANTIDDOS CRIADO POR POLUX, NAO REMOVA ESSES CREDITOS**
+
 import java.net.*;
 import java.io.*;
 import java.nio.file.*;
@@ -6,52 +8,46 @@ import java.util.*;
 public class Server {
     static int init = 0;
     public static void main(String[] args) throws IOException {
-        // Cria um socket de servidor na porta 10000
-        ServerSocket serverSocket = new ServerSocket(10000);
-        // Cria o arquivo de IP
-        Path filePath = Paths.get("IPS.txt");;
-        System.out.println("Servidor iniciado na porta 10000");
-        while (true) {
-          // Fica à escuta de uma conexão de cliente
-            Socket clientSocket = serverSocket.accept();
-            System.out.println("Conexão de cliente aceita");
-          // Lê os IPS que se conectaram recentemente
-            List<String> lines = Files.readAllLines(filePath);
-            for (int i = 0; i < lines.size(); i++) {
-            lines.set(i, lines.get(i).replace("[]", ""));
+
+          // Cria uma array para armazenar IPS conectados
+          List<String> connectedIps = new ArrayList<>();
+
+          // Cria um hash para IPS e Portas que serão bloqueados
+          Set<String> blockedIps = new HashSet<>();
+          Set<Integer> blockedPorts = new HashSet<>();
+
+        try (ServerSocket serverSocket = new ServerSocket(10000)) {
+              System.out.println("Servidor iniciado na porta 10000");
+              while (true) {
+                  try (Socket socket = serverSocket.accept()) {
+                      String clientIp = socket.getInetAddress().getHostAddress();
+                      int clientPort = socket.getPort();
+
+                      // Verificação do IP
+                      if (blockedIps.contains(clientIp) || blockedPorts.contains(clientPort)) {
+                          // Bloqueia o IP e Fecha a conexão
+                          System.out.println("[ANTIDDOS]" + clientIp + ":" + clientPort);
+                          socket.close();
+                      } else {
+                          // Aceita Conexão e adiciona a um array
+                          System.out.println("[Conexão Aceita] " + clientIp + ":" + clientPort);
+                          connectedIps.add(clientIp);
+                          System.out.println(connectedIps);
+                      }
+                      // Verifica se existe o IP na lista, Se sim. Bloqueia o IP e a Porta
+                      String IPtoCheck = clientIp;
+                      int count = Collections.frequency(connectedIps, IPtoCheck);
+                      if (count == 1) {
+                          blockedIps.add(clientIp);
+                          // Remova o "//" Caso queira que a porta seja bloqueada tambem
+                          // blockedPorts.add(clientPort);
+                      }
+                  } catch (IOException e) {
+                      e.printStackTrace();
+                  }
+              }
+          } catch (IOException e) {
+              e.printStackTrace();
           }
-
-            // Obtém o endereço IP do cliente
-            InetAddress clientAddress = clientSocket.getInetAddress();
-            try (BufferedWriter writer = Files.newBufferedWriter(filePath)) {
-            writer.write(lines + "\n" + clientAddress.getHostAddress());
-            }
-            System.out.println("Endereço IP do cliente: " + clientAddress.getHostAddress());
-
-
-            // Obtem o tempo de conexão
-            Date startTime = new Date();
-            Date endTime = new Date();
-            long duration = endTime.getTime() - startTime.getTime();
-            long s = duration / 1000;
-
-            // Obtém a porta do cliente e a porta do servidor
-            int clientPort = clientSocket.getPort();
-            int serverPort = clientSocket.getLocalPort();
-            System.out.println("Porta do cliente: " + clientPort);
-            System.out.println("Porta do servidor: " + serverPort);
-
-            // Cria um fluxo de saída para enviar dados para o cliente
-            PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-
-            // Envia uma mensagem de boas-vindas para o cliente
-            out.print("Conexão recebida");
-            if (lines.contains(clientAddress.getHostAddress())) {
-              System.out.println("[ANTIDDOS] Conexão interceptada");
-              System.out.println("[ANTIDDOS] IP: " + clientAddress.getHostAddress());
-              System.out.println("[ANTIDDOS] Porta: " + clientPort);
-              // break;
-            }
       }
-    }
 }
