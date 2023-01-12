@@ -1,20 +1,31 @@
-import java.net.*;
-import java.io.*;
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 
 public class Client {
     public static void main(String[] args) throws IOException {
-        // Cria um socket de cliente e se conecta ao servidor na porta 10000
-        Socket clientSocket = new Socket("localhost", 10000);
-        System.out.println("Conectado ao servidor");
+        // endereço IP e porta do servidor
+        InetAddress serverIp = InetAddress.getByName("127.0.0.1");
+        int serverPort = 10000;
 
-        // Cria um fluxo de entrada para ler dados do servidor
-        BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+        // cria um socket UDP
+        DatagramSocket socket = new DatagramSocket();
 
-        // Lê a mensagem de boas-vindas do servidor
-        String welcomeMessage = in.readLine();
-        System.out.println("Mensagem do servidor: " + welcomeMessage);
+        // envia pacotes para o servidor
+        while (true) {
+            // cria o pacote a ser enviado
+            byte[] data = "Hello, Server!".getBytes();
+            DatagramPacket packet = new DatagramPacket(data, data.length, serverIp, serverPort);
 
-        // Fecha a conexão com o servidor
-        // clientSocket.close();
+            // envia o pacote
+            socket.send(packet);
+
+            // imprime mensagem de log
+            System.out.println("Packet sent to " + serverIp + ":" + serverPort);
+
+            // espera 1 segundo antes de enviar o próximo pacote
+            Thread.sleep(1000);
+        }
     }
 }
