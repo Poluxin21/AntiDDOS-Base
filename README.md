@@ -32,7 +32,7 @@ $ java Client
 - Baixe o openjdk8 em: https://www.oracle.com/br/java/technologies/javase/javase8u211-later-archive-downloads.html]
 - instale o openjdk 
 
-# Instalação Maven
+# Instalação Maven - Windows
 - Faça a instalação do maven aqui: https://maven.apache.org/download.cgi
 - Você pode seguir os passos de configuração aqui: https://dicasdejava.com.br/como-instalar-o-maven-no-windows/
 
@@ -42,5 +42,5 @@ $ mvn package or mvn install
 $ java -jar Project-1.0-SNAPSHOT.jar
 ```
 
-* Com eclipeIDE* 
+# Com eclipeIDE 
 - Apenas pressione para iniciar o Server e depois o client
