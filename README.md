@@ -1,5 +1,5 @@
 # Example-AntiDDOS
-Base de DDOS ( EM DESEVOLVIMENTO )
+Base de Anti-DDOS ( EM DESEVOLVIMENTO )
 - Um server 
 - Um client para executar testes locais
 
