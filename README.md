@@ -19,8 +19,9 @@ Inicie sempre o Server antes do cliente
 $ mvn clean install
 $ mvn package or mvn install
 $ mvn exec:java or java -jar Project-1.0-SNAPSHOT.jar
-
+```
 Para testes
+
 ```
 $ javac Client.java
 $ java Client
