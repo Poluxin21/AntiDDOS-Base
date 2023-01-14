@@ -11,7 +11,7 @@
     <repository>
       <id>pcap4j-repo</id>
       <name>Pcap4J Repository</name>
-      <url>https://github.com/kaitoy/pcap4j/raw/mvn</url>
+      <url>https://github.com/kaitoy/pcap4j/tree/v1/mvn</url>
     </repository>
 
   </repositories>
@@ -30,11 +30,18 @@
       <version>2.0.0-alpha.6</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+  <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>2.0.6</version>
+  </dependency>
+  <!-- https://mvnrepository.com/artifact/org.webjars/jTable -->
 <dependency>
-    <groupId>org.slf4j</groupId>
-    <artifactId>slf4j-api</artifactId>
-    <version>2.0.0</version>
+    <groupId>org.webjars</groupId>
+    <artifactId>jTable</artifactId>
+    <version>2.4.0</version>
 </dependency>
+
 
 
   </dependencies>
