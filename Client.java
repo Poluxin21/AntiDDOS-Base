@@ -1,31 +1,37 @@
 import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
+import java.io.OutputStream;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
 
 public class Client {
-    public static void main(String[] args) throws IOException {
-        // endereço IP e porta do servidor
-        InetAddress serverIp = InetAddress.getByName("127.0.0.1");
+    public static void main(String[] args) throws UnknownHostException, IOException {
+        // Endereço IP do servidor
+        InetAddress serverAddress = InetAddress.getByName("127.0.0.1");
+        // Porta do servidor
         int serverPort = 10000;
 
-        // cria um socket UDP
-        DatagramSocket socket = new DatagramSocket();
+        // Cria um novo socket TCP
+        Socket socket = new Socket();
+        System.out.println("Conectando ao servidor " + serverAddress + ":" + serverPort);
+        socket.connect(new InetSocketAddress(serverAddress, serverPort));
 
-        // envia pacotes para o servidor
+        // Cria uma string de tamanho 5MB
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 2 * 1024; i++) {
+            sb.append("a");
+        }
+        String packetData = sb.toString();
+
+        // Obtém o fluxo de saída do socket
+        OutputStream output = socket.getOutputStream();
+
+        // Loop para manter a conexão aberta e enviar pacotes
         while (true) {
-            // cria o pacote a ser enviado
-            byte[] data = "Hello, Server!".getBytes();
-            DatagramPacket packet = new DatagramPacket(data, data.length, serverIp, serverPort);
-
-            // envia o pacote
-            socket.send(packet);
-
-            // imprime mensagem de log
-            System.out.println("Packet sent to " + serverIp + ":" + serverPort);
-
-            // espera 1 segundo antes de enviar o próximo pacote
-            Thread.sleep(1000);
+            // Envia o pacote
+            output.write(packetData.getBytes());
+            System.out.println("Pacote de 5MB enviado para o servidor");
         }
     }
 }
