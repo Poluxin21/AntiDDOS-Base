@@ -41,8 +41,8 @@ $ java Client
 
 ```
 $ mvn clean install
-$ mvn package or mvn install
-$ java -jar Project-1.0-SNAPSHOT.jar
+$ mvn clean compile
+$ mvn exec:java or java -jar Project-1.0-SNAPSHOT.jar
 ```
 
 # Com eclipeIDE 
