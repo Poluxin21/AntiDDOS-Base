@@ -17,7 +17,7 @@ public class Client {
         System.out.println("Conectando ao servidor " + serverAddress + ":" + serverPort);
         socket.connect(new InetSocketAddress(serverAddress, serverPort));
 
-        // Cria uma string de tamanho 5MB
+        // Cria uma string de tamanho 2 KB
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < 2 * 1024; i++) {
             sb.append("a");
@@ -31,7 +31,7 @@ public class Client {
         while (true) {
             // Envia o pacote
             output.write(packetData.getBytes());
-            System.out.println("Pacote de 5MB enviado para o servidor");
+            System.out.println("Pacote de 2KB enviado para o servidor");
         }
     }
 }
