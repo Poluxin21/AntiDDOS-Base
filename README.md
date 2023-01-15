@@ -44,6 +44,3 @@ $ mvn clean install
 $ mvn clean compile
 $ mvn exec:java or java -jar Project-1.0-SNAPSHOT.jar
 ```
-
-# Com eclipeIDE 
-- Apenas pressione para iniciar o Server e depois o client
