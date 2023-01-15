@@ -6,7 +6,10 @@ Base de Anti-DDOS ( EM DESEVOLVIMENTO )
 # Instalação - Linux
 
 ``` 
+sudo git clone https://github.com/Poluxin21/AntiDDOS-Base
 sudo apt-get install openjdk-8-headless
+sudo apt-get upgrade && update
+cd AntiDDOS-Base
 ``` 
 
 # Inicialização
