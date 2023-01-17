@@ -1,8 +1,6 @@
 # Example-AntiDDOS
 Base de Anti-DDOS ( EM DESEVOLVIMENTO )
 
-Acesse a comunidade do nosso whatsapp para ficar atualizado sempre: https://chat.whatsapp.com/FqBqNOmXwaLALtgJWaenxw
-
 Os arquivos tem:
 - Um server 
 - Um client para executar testes locais
